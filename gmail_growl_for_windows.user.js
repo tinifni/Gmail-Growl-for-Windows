@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name           Gmail Growl for Windows
 // @description    Displays Growl for Windows notification for new mail and new chats
-// @version        1.0.0
-// @date           2009-07-06
+// @version        1.0.1
+// @date           2009-07-07
 // @author	   Justin Anderson
 // @namespace      http://userscripts.org/users/86439
 // @include        https://mail.google.com/mail*
