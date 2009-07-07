@@ -114,13 +114,16 @@ function GmailGrowlAlerts(gmail) {
     }
 				
     if(self.newMail()) {
-      if(mailCount == 0) {
-	mailCount = 60;
-	return GmailGrowl.mailReceived(self.getUnreadCount());
+      mailCountNew = self.getUnreadCount();
+      if(mailCountNew > mailCountOld) {
+	GmailGrowl.mailReceived(mailCountNew - mailCountOld);
+	mailCountOld = mailCountNew;
+      } else if(mailCountNew < mailCountOld) {
+	mailCountOld = mailCountNew;
       }
-
-      if(mailCount > 0)
-	mailCount--;
+    } else {
+      mailCountNew = 0;
+      mailCountOld = 0;
     }
   }
 	
@@ -156,7 +159,7 @@ var GmailGrowl = function() {
     },
 	
     mailReceived : function(message) {
-      GrowlMonkey.notify(GmailGrowl.appname, "mailreceived", "Gmail Mail Received", "You have " + message + " new mail!\n", "\n");
+      GrowlMonkey.notify(GmailGrowl.appname, "mailreceived", "Gmail Mail Received", "You have received " + message + " new mail!\n", "\n");
     }
   }
 }();
