@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           Gmail Growl for Windows
 // @description    Displays Growl for Windows notification for new mail and new chats
-// @version        1.0.1
+// @version        1.0.2
 // @date           2009-07-07
 // @author	   Justin Anderson
 // @namespace      http://userscripts.org/users/86439
@@ -67,10 +67,12 @@ function GmailGrowlAlerts(gmail) {
   this.getSearchElement = function() {
     var element;
 
-    var nav = gmail.getNavPaneElement();
-		
+    var frame = top.document.getElementById('canvas_frame');
+    if(frame) {
+      var nav = frame.contentWindow.document.getElementsByClassName('n0');
+    }
     if(nav) {
-      var potential = nav.getElementsByTagName('a')[0];
+      var potential = nav[0];
 			
       if(potential.className.indexOf('n0') !== -1) {
 	element = potential;
